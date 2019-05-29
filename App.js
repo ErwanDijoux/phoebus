@@ -1,8 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+
 import {Font} from 'expo';
 import Connexion from './Components/Screens/Connexion';
 import LibraryScreen from './Components/Screens/LibraryScreen';
+
+
+// import Connexion from './Components/Screens/Connexion';
+// import SignInUpScreen from './Components/Screens/SignInUpScreen';
+import Chargement from './Components/Screens/Chargement';
+
+
 
 
 
@@ -25,9 +33,13 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={{flex:1}}>
+
       {  this.state.loaded ? (
       <LibraryScreen/>
     ) : null}
+
+        
+
       </View>
     );
   }
