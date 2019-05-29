@@ -15,14 +15,13 @@ export default class Connexion extends React.Component {
 
                 <Image style={{width: 170, height: 170, marginTop: 40}} source={require('../../assets/logo.png')}/>
                 <Divider style={{height: 20}}></Divider>
-                <Text style={{fontFamily: 'Helvetica Neue', color: '#2FA5A0', fontWeight: 'bold', fontSize: 30}}>Phoebus</Text>
+                <Text style={{color: '#2FA5A0', fontWeight: 'bold', fontSize: 30}}>Phoebus</Text>
               
               <Divider style={{height:50}}/>
 
                 <Button
                 title="Sign In"
                 style={{width:300}}
-                fontFamily= 'Helvetica Neue'
                 fontWeight= 'bold'
                 fontSize= '20'
                 rounded
@@ -35,7 +34,6 @@ export default class Connexion extends React.Component {
                 <Button
                 title="Sign Up"
                 style={{width:300}}
-                fontFamily= 'Helvetica Neue'
                 fontWeight= 'bold'
                 fontSize= '20'
                 rounded
