@@ -38,9 +38,17 @@ export default class App extends React.Component {
       <AlbumsScreen/>
     ) : null}
 
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 6f11e60b1f74da50e7303526f0ff406815ec2267
 
       </View>
     );
   }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6f11e60b1f74da50e7303526f0ff406815ec2267
