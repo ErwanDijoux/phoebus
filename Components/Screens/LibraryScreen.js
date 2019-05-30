@@ -31,9 +31,10 @@ const list = [
 
 export default class LibraryScreen extends React.Component {
   render() {
+    
     return (
-      <View style={{flex:1, backgroundColor: '#FFD2BE', alignItems:'center' }}>
-          {/* <List  containerStyle={{marginBottom: 20}}>
+      <View style={{flex:1, backgroundColor: '#FFD2BE', }}>
+          <List  containerStyle={{marginBottom: 20}}>
             {
                 list.map((l) => (
                 <ListItem leftIcon={{}} hideChevron  containerStyle={{backgroundColor: '#FFD2BE'}}
@@ -41,11 +42,13 @@ export default class LibraryScreen extends React.Component {
                     avatar={{uri:l.avatar_url}}
                     key={l.name}
                     title={l.name}
+                    
+                    
                 />
                 ))
             }
-        </List> */}
-        <View   style={{flexDirection:'row', alignItems: 'center', width:'90%', backgroundColor: 'transparent',  borderBottomWidth:'0.5', borderBottomColor:'#007D8F', height:65, marginTop:140,}}>
+        </List>
+        {/* <View   style={{flexDirection:'row', alignItems: 'center', width:'90%', backgroundColor: 'transparent',  borderBottomWidth:'0.5', borderBottomColor:'#007D8F', height:65, marginTop:140,}}>
             <Image source={require('../../assets/icon_playlist.png')} style={{width: 18, height:18}}/>
             <Text style={{paddingLeft:20, fontFamily:'openSans', fontSize:20, color:'#007D8F'}}>Playlists</Text>
         </View>
@@ -60,10 +63,13 @@ export default class LibraryScreen extends React.Component {
         <View  style={{flexDirection:'row', alignItems: 'center', width:'90%', backgroundColor: 'transparent',  borderBottomWidth:'0.5', borderBottomColor:'#007D8F', height:65}}>
             <Image source={require('../../assets/icon_song.png')} style={{width: 18, height:18}}/>
             <Text style={{paddingLeft:20, fontFamily:'openSans', fontSize:20, color:'#007D8F'}}>Songs</Text>
-        </View>
+        </View> */}
         
       </View>
     );
   }
 }
+
+// A placer dans le style de la view
+// alignItems:'center'
 
