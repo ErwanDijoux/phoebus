@@ -6,10 +6,11 @@ import Connexion from './Components/Screens/Connexion';
 import LibraryScreen from './Components/Screens/LibraryScreen';
 
 import SongsScreen from './Components/Screens/SongsScreen';
-// import SignInUpScreen from './Components/Screens/SignInUpScreen';
+import SignInUpScreen from './Components/Screens/SignInUpScreen';
 import Chargement from './Components/Screens/Chargement';
 import AlbumsScreen from './Components/Screens/AlbumsScreen';
 import ArtistsScreen from './Components/Screens/ArtistsScreen';
+import PlaylistsScreen from './Components/LibraryScreen/PlaylistsScreen';
 
 
 
@@ -35,14 +36,14 @@ export default class App extends React.Component {
     return (
       <View style={{flex:1}}>
 
-        <PlayListsScreen/>
-
       {  this.state.loaded ? (
-      <SongsScreen/>
+      <PlaylistsScreen/>
     ) : null}
 
+        
 
       </View>
     );
   }
 }
+
