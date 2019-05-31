@@ -72,20 +72,27 @@ export default class ArtistsScreen extends React.Component {
             var ArtistsListItem = artistsList.map((artist, i) => {
 
             return (
-            <ListItem
+            <ListItem hideChevron 
+            
                 key={i}
-                title={artist}
+                
+                title={<View style={styles.artist}>
+
+                <Image source={require('../../assets/icon_artist.png')} style={{width:18, height:18,  marginRight: 15}}/>
+                <Text style={styles.artist}>{artist}</Text>
+                
+            </View>}
             />);
 
         })
 
 
             return (
-            <View style={styles.container}>
+            <View style={styles.container2}>
             
                 <View style={{marginTop: 40, marginBottom: 20, alignItems: "center"}}><Text >Artists</Text></View>
 
-                <ScrollView style={styles.container}>
+                <ScrollView >
                     <SafeAreaView style={styles.container}>
                         <List style={styles.container} containerStyle={{backgroundColor: 'FFD2BE'}}>
                             {ArtistsListItem}
@@ -101,14 +108,36 @@ export default class ArtistsScreen extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
+        
         flex: 1,
-        paddingTop: 15,
-        backgroundColor: '#FFD2BE'
+        paddingTop: 0,
+        backgroundColor: '#FFD2BE',
+        margin: 20,
+        
+        
+    },
+    container2: {
+        
+        flex: 1,
+        paddingTop: 0,
+        backgroundColor: '#FFD2BE',
+        
+        
+        
     },
     artist:{
+        
         flexDirection:'row',
-        padding:10,
-        paddingTop:5,
+        padding:0,
+        paddingTop:0,
+        color: '#007d8f',
+        
+    },
+    artist2:{
+        flexDirection:'column',
+        padding:2,
+        paddingTop:2,
+        color: '#007d8f'
     },
     ratingText:{
         color: 'grey',

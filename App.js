@@ -5,10 +5,11 @@ import {Font} from 'expo';
 import Connexion from './Components/Screens/Connexion';
 import LibraryScreen from './Components/Screens/LibraryScreen';
 
-// import Connexion from './Components/Screens/Connexion';
+import SongsScreen from './Components/Screens/SongsScreen';
 // import SignInUpScreen from './Components/Screens/SignInUpScreen';
 import Chargement from './Components/Screens/Chargement';
 import AlbumsScreen from './Components/Screens/AlbumsScreen';
+import ArtistsScreen from './Components/Screens/ArtistsScreen';
 
 
 
@@ -35,7 +36,7 @@ export default class App extends React.Component {
       <View style={{flex:1}}>
 
       {  this.state.loaded ? (
-      <AlbumsScreen/>
+      <SongsScreen/>
     ) : null}
 
         

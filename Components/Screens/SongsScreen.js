@@ -1,6 +1,6 @@
 import React from 'react';
 import {
- Image,
+ 
  fontStyle,
  View, ScrollView, StyleSheet, SafeAreaView, Image
 } from 'react-native';
@@ -63,7 +63,7 @@ export default class SongsScreen extends React.Component {
             var songsListItem = songsList.map((song, i) => {
 
             return (
-            <ListItem
+            <ListItem hideChevron
                 key={i}
                 title={song.title}
                 subtitle={
@@ -77,11 +77,11 @@ export default class SongsScreen extends React.Component {
 
 
             return (
-            <View style={styles.container}>
+            <View style={styles.container2}>
             
                 <View style={{marginTop: 40, marginBottom: 20, alignItems: "center"}}><Text >Songs</Text></View>
 
-                <ScrollView style={styles.container}>
+                <ScrollView >
                     <SafeAreaView style={styles.container}>
                         <List style={styles.container} containerStyle={{backgroundColor: 'FFD2BE'}}>
                             {songsListItem}
@@ -97,6 +97,12 @@ export default class SongsScreen extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
+        paddingTop: 15,
+        backgroundColor: '#FFD2BE',
+        margin: 20,
+    },
+    container2: {
         flex: 1,
         paddingTop: 15,
         backgroundColor: '#FFD2BE'

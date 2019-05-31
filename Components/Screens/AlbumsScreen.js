@@ -7,7 +7,7 @@ import {
 import {Avatar, Text, Button, Divider, ListItem, List} from 'react-native-elements'
 
 
-export default class ArtistsScreen extends React.Component {
+export default class AlbumsScreen extends React.Component {
     render() {
 
         var songsList = [
@@ -80,12 +80,12 @@ export default class ArtistsScreen extends React.Component {
             var ArtistsListItem = displayedList.map((item, i) => {
 
             return (
-            <ListItem style={styles.artist}
+            <ListItem  hideChevron style={styles.artist} 
             
                 key={i}
                 title={ <View style={styles.artist}>
 
-                            <Image source={require('../../assets/icon_album.png')} style={{width:18, height:18, marginTop: 15, marginRight: 15}}/>
+                            <Image source={require('../../assets/icon_album.png')} style={{width:18, height:18, marginTop: 10, marginRight: 15}}/>
 
 
                             <View style={styles.artist2}>
@@ -100,13 +100,13 @@ export default class ArtistsScreen extends React.Component {
 
 
             return (
-            <View style={styles.container}>
+            <View style={styles.container2} >
             
-                <View style={{marginTop: 40, marginBottom: 20, alignItems: "center"}}><Text>Albums</Text></View>
+                <View style={{marginTop: 40, marginBottom: 20, alignItems: "center", }}><Text>Albums</Text></View>
 
-                <ScrollView style={styles.container}>
+                <ScrollView  >
                     <SafeAreaView style={styles.container}>
-                        <List style={styles.container} containerStyle={{backgroundColor: 'FFD2BE'}}>
+                        <List  style={styles.container} containerStyle={{backgroundColor: 'FFD2BE'}}>
                             {ArtistsListItem}
                         </List>
                     </SafeAreaView>
@@ -120,12 +120,25 @@ export default class ArtistsScreen extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
+        
+        flex: 1,
+        paddingTop: 0,
+        backgroundColor: '#FFD2BE',
+        margin: 20,
+        
+        
+    },
+    container2: {
+        
         flex: 1,
         paddingTop: 0,
         backgroundColor: '#FFD2BE',
         
+        
+        
     },
     artist:{
+        
         flexDirection:'row',
         padding:0,
         paddingTop:0,
