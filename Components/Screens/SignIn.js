@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import {Button, FormLabel, FormInput, Divider} from 'react-native-elements';
 
 
@@ -23,7 +23,7 @@ export class SignIn extends Component {
               style={{width:300}}
               fontFamily= 'Helvetica Neue'
               fontWeight= 'bold'
-              fontSize= '20'
+              fontSize= {20}
               rounded
               large
               backgroundColor='#007D8F'

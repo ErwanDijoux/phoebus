@@ -35,14 +35,14 @@ export default class App extends React.Component {
     return (
       <View style={{flex:1}}>
 
+        <PlayListsScreen/>
+
       {  this.state.loaded ? (
       <SongsScreen/>
     ) : null}
 
-        
 
       </View>
     );
   }
 }
-
