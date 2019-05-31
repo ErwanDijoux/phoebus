@@ -23,7 +23,7 @@ export default class Connexion extends React.Component {
                 title="Sign In"
                 style={{width:300}}
                 fontWeight= 'bold'
-                fontSize= '20'
+                fontSize= {20}
                 rounded
                 large
                 backgroundColor='#007D8F'
@@ -35,7 +35,7 @@ export default class Connexion extends React.Component {
                 title="Sign Up"
                 style={{width:300}}
                 fontWeight= 'bold'
-                fontSize= '20'
+                fontSize= {20}
                 rounded
                 large
                 backgroundColor='#007D8F'
