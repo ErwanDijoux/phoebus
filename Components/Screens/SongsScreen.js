@@ -2,7 +2,7 @@ import React from 'react';
 import {
  
  fontStyle,
- View, ScrollView, StyleSheet, SafeAreaView, Image
+ View, ScrollView, StyleSheet, SafeAreaView, Image, TouchableOpacity
 } from 'react-native';
 import {Avatar, Text, Button, Divider, ListItem, List} from 'react-native-elements'
 
@@ -16,7 +16,7 @@ export default class SongsScreen extends React.Component {
                 track: 3,
                 album: "Departure",
                 artist: "Nujabes",
-                year: 2004
+                year: 2004,
                 },
                 {
                 title: "Somebody Else's Guy",
@@ -60,18 +60,27 @@ export default class SongsScreen extends React.Component {
                 return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
             });
 
-            var songsListItem = songsList.map((song, i) => {
+            var songsListItem = songsList.map((item, i) => {
 
             return (
+
             <ListItem hideChevron
                 key={i}
-                title={song.title}
-                subtitle={
-                    <View>
-                        <Text style={styles.artist}>{song.artist}</Text>
-                    </View>
+                title={<TouchableOpacity onPress={ () => this.props.navigation.navigate("PlayerScreen")}>
+
+                <View style={styles.artist}>
+                <Image source={require('../../assets/icon_song.png')} style={{width:18, height:18, marginTop: 10, marginRight: 15}}/>
+
+                <View style={styles.vieww}>
+                <Text style={styles.artist}>{item.title}</Text>
+                <Text style={styles.artist}>{item.artist}</Text>
+                </View>
+                </View>
+
+                </TouchableOpacity>
                 }
-            />);
+            />
+            );
 
             })
 
@@ -83,7 +92,7 @@ export default class SongsScreen extends React.Component {
 
                 <ScrollView >
                     <SafeAreaView style={styles.container}>
-                        <List style={styles.container} containerStyle={{backgroundColor: 'FFD2BE'}}>
+                        <List style={styles.container} containerStyle={{backgroundColor: '#FFD2BE'}}>
                             {songsListItem}
                         </List>
                     </SafeAreaView>
@@ -97,20 +106,31 @@ export default class SongsScreen extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
+        
         flex: 1,
-        paddingTop: 15,
+        paddingTop: 0,
         backgroundColor: '#FFD2BE',
         margin: 20,
+        
+        
     },
     container2: {
         flex: 1,
-        paddingTop: 15,
-        backgroundColor: '#FFD2BE'
+        paddingTop: 0,
+        backgroundColor: '#FFD2BE',
     },
     artist:{
+        
         flexDirection:'row',
-        padding:10,
-        paddingTop:5,
+        padding:0,
+        paddingTop:0,
+        color: '#007d8f',
+    },
+    artist2:{
+        flexDirection:'column',
+        padding:2,
+        paddingTop:2,
+        color: '#007d8f'
     },
     ratingText:{
         color: 'grey',

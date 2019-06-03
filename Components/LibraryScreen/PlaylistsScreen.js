@@ -2,7 +2,7 @@ import React from 'react';
 import {
  Image,
  fontStyle,
- View, ScrollView, StyleSheet, SafeAreaView
+ View, ScrollView, StyleSheet, SafeAreaView, TouchableOpacity
 } from 'react-native';
 import {Avatar, Text, Button, Divider, ListItem, List} from 'react-native-elements'
 import ModalPlayList from './ModalPlayList';
@@ -62,7 +62,17 @@ export default class PlaylistsScreen extends React.Component {
             return (
             <ListItem
                 key={i}
-                title={playlist.title}
+                title={<ListItem hideChevron 
+            
+                    key={i}
+                    
+                    title={<TouchableOpacity onPress={ () => this.props.navigation.navigate("AlbumsScreen")}>
+                    <View style={styles.vieww}>
+                      <Image source={require("../../assets/icon_artist.png")} style={{width:18, height:18, marginRight: 10}}/>
+                      <Text style={styles.artist}>{item}</Text>
+                    </View>
+                  </TouchableOpacity>}
+                />}
     
             />);
 
@@ -96,16 +106,44 @@ export default class PlaylistsScreen extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
+        
         flex: 1,
-        paddingTop: 15,
-        backgroundColor: '#FFD2BE'
+        paddingTop: 0,
+        backgroundColor: '#FFD2BE',
+        margin: 20,
+        
+        
+    },
+    container2: {
+        
+        flex: 1,
+        paddingTop: 0,
+        backgroundColor: '#FFD2BE',
+        
+        
+        
     },
     artist:{
         flexDirection:'row',
-        padding:10,
-        paddingTop:5,
+        padding:0,
+        paddingTop:0,
+        color: '#007d8f',
+        
+    },
+
+    vieww:{
+      flexDirection:'row',
+      marginTop: 8,
+      marginBottom: 8,
+    },
+    artist2:{
+        flexDirection:'column',
+        padding:2,
+        paddingTop:2,
+        color: '#007d8f'
     },
     ratingText:{
         color: 'grey',
     }
 });
+  

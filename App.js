@@ -12,8 +12,7 @@ import AlbumsScreen from './Components/Screens/AlbumsScreen';
 import ArtistsScreen from './Components/Screens/ArtistsScreen';
 import PlaylistsScreen from './Components/LibraryScreen/PlaylistsScreen';
 
-
-
+import Navigation from './Components/Navigation/Navigation';
 
 
 export default class App extends React.Component {
@@ -37,7 +36,7 @@ export default class App extends React.Component {
       <View style={{flex:1}}>
 
       {  this.state.loaded ? (
-      <PlaylistsScreen/>
+      <Navigation/>
     ) : null}
 
         

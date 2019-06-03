@@ -2,7 +2,7 @@ import React from 'react';
 import {
  Image,
  fontStyle,
- View, ScrollView, StyleSheet, SafeAreaView
+ View, ScrollView, StyleSheet, SafeAreaView, TouchableOpacity
 } from 'react-native';
 import {Avatar, Text, Button, Divider, ListItem, List} from 'react-native-elements'
 
@@ -16,35 +16,41 @@ export default class AlbumsScreen extends React.Component {
                 track: 3,
                 album: "Departure",
                 artist: "Nujabes",
-                year: 2004
+                year: 2004,
+                link: "SongsScreen"
             },
             {
                 title: "Somebody Else's Guy",
                 track: 1,
                 album: "Somebody Else's Guy",
                 artist: "Jocelyn Brown",
-                year: 1984
+                year: 1984,
+                link: "SongsScreen"
+
             },
             {
                 title: "Plastic Love",
                 track: 1,
                 album: "Plastic Love",
                 artist: "Mariya Takeuchi",
-                year: 1984
+                year: 1984,
+                link: "SongsScreen"
             },
             {
                 title: "Battlecry",
                 track: 1,
                 album: "Departure",
                 artist: "Nujabes",
-                year: 2004
+                year: 2004,
+                link: "SongsScreen"
             },
             {
                 title: "A day by atmosphere supreme",
                 track: 9,
                 album: "Metaphorical Music",
                 artist: "Nujabes",
-                year: 2003
+                year: 2003,
+                link: "SongsScreen"
             },
             ]
             
@@ -80,19 +86,21 @@ export default class AlbumsScreen extends React.Component {
             var ArtistsListItem = displayedList.map((item, i) => {
 
             return (
-            <ListItem  hideChevron style={styles.artist} 
+            <ListItem hideChevron style={styles.artist} 
             
                 key={i}
-                title={ <View style={styles.artist}>
+                title={       <TouchableOpacity onPress={ () => this.props.navigation.navigate(item.link)}>
 
+                            <View style={styles.artist}>
                             <Image source={require('../../assets/icon_album.png')} style={{width:18, height:18, marginTop: 10, marginRight: 15}}/>
 
-
-                            <View style={styles.artist2}>
+                            <View style={styles.vieww}>
                             <Text style={styles.artist}>{item.album}</Text>
                             <Text style={styles.artist}>{item.artist}</Text>
                             </View>
-                        </View>
+                            </View>
+
+                            </TouchableOpacity>
                         }
             />);
 
@@ -102,11 +110,11 @@ export default class AlbumsScreen extends React.Component {
             return (
             <View style={styles.container2} >
             
-                <View style={{marginTop: 40, marginBottom: 20, alignItems: "center", }}><Text>Albums</Text></View>
+                <View style={{marginTop: 40, marginBottom: 20, alignItems: "center"}}><Text>Albums</Text></View>
 
                 <ScrollView  >
                     <SafeAreaView style={styles.container}>
-                        <List  style={styles.container} containerStyle={{backgroundColor: 'FFD2BE'}}>
+                        <List  style={styles.container} containerStyle={{backgroundColor: '#FFD2BE'}}>
                             {ArtistsListItem}
                         </List>
                     </SafeAreaView>
@@ -129,13 +137,9 @@ const styles = StyleSheet.create({
         
     },
     container2: {
-        
         flex: 1,
         paddingTop: 0,
         backgroundColor: '#FFD2BE',
-        
-        
-        
     },
     artist:{
         
@@ -143,7 +147,6 @@ const styles = StyleSheet.create({
         padding:0,
         paddingTop:0,
         color: '#007d8f',
-        
     },
     artist2:{
         flexDirection:'column',
