@@ -10,7 +10,7 @@ import {Avatar, Text, Button, Divider, SocialIcon, Header} from 'react-native-el
 
 export default class ConnectApps extends React.Component {
     render() {
-      return (
+      return ( 
 
         <View style={{flex:1, backgroundColor: '#FFD2BE', alignItems: 'center'}}>
 
