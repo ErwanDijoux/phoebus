@@ -1,60 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
- Image,
- fontStyle,
- View, ScrollView, StyleSheet,  SafeAreaView, TouchableOpacity
+Image, fontStyle, View, ScrollView, StyleSheet,  SafeAreaView, TouchableOpacity
 } from 'react-native';
 import {Avatar, Text, Button, Divider, ListItem, List} from 'react-native-elements'
 
+import { connect } from 'react-redux'
 
-export default class ArtistsScreen extends React.Component {
+
+class ArtistsScreen extends React.Component {
+    
     render() {
 
-        var songsList = [
-            {
-                title: "Arurian Dance",
-                track: 3,
-                album: "Departure",
-                artist: "Nujabes",
-                year: 2004,
-                link: 'AlbumsScreen'
-            },
-            {
-                title: "Somebody Else's Guy",
-                track: 1,
-                album: "Somebody Else's Guy",
-                artist: "Jocelyn Brown",
-                year: 1984,
-                link: 'AlbumsScreen'
-            },
-            {
-                title: "Plastic Love",
-                track: 1,
-                album: "Plastic Love",
-                artist: "Mariya Takeuchi",
-                year: 1984,
-                link: 'AlbumsScreen'
-            },
-            {
-                title: "Battlecry",
-                track: 1,
-                album: "Departure",
-                artist: "Nujabes",
-                year: 2004,
-                link: 'AlbumsScreen'
-            },
-            {
-                title: "A day by atmosphere supreme",
-                track: 9,
-                album: "Metaphorical Music",
-                artist: "Nujabes",
-                year: 2003,
-                link: 'AlbumsScreen'
-            },
-            ]
 
-            
-        songsList.sort(function(a, b) {
+        // console.log("Bonjour, moi, this.props.songsList, je suis", this.props.songsList)
+
+        this.props.songsList.sort(function(a, b) {
                 var textA = a.artist.toUpperCase();
                 var textB = b.artist.toUpperCase();
                 return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
@@ -62,36 +22,38 @@ export default class ArtistsScreen extends React.Component {
 
             var artistsList = []
 
-            for (var i = 0; i < songsList.length; i++) {
+            for (var i = 0; i < this.props.songsList.length; i++) {
 
-                if(artistsList.indexOf(songsList[i].artist) === -1){
-                    artistsList.push(songsList[i].artist)
+                if(artistsList.indexOf(this.props.songsList[i].artist) === -1){
+                    artistsList.push(this.props.songsList[i].artist)
                 }
             }
 
 
 
 
-
             var ArtistsListItem = artistsList.map((item, i) => {
+
+                
 
             return (
             <ListItem hideChevron 
             
                 key={i}
-                
-                title={<TouchableOpacity onPress={ () => this.props.navigation.navigate("AlbumsScreen")}>
-                <View style={styles.vieww}>
-                  <Image source={require("../../assets/icon_artist.png")} style={{width:18, height:18, marginRight: 10}}/>
-                  <Text style={styles.artist}>{item}</Text>
-                </View>
-              </TouchableOpacity>}
+                title={
+                <TouchableOpacity onPress={  () => {this.props.artist(item); this.props.navigation.navigate("AlbumsScreen")} }>
+                    <View style={styles.vieww}>
+                        <Image source={require("../../assets/icon_artist.png")} style={{width:18, height:18, marginRight: 10}}/>
+                        <Text style={styles.artist}>{item}</Text>
+                    </View>
+                </TouchableOpacity>}
             />);
 
         })
 
 
             return (
+                
             <View style={styles.container2}>
             
                 <View style={{marginTop: 40, marginBottom: 20, alignItems: "center"}}><Text >Artists</Text></View>
@@ -107,6 +69,26 @@ export default class ArtistsScreen extends React.Component {
             );
     }
 }
+
+
+
+
+
+function mapDispatchToProps(dispatch) {
+        return {
+        handleContact: function(nomArtiste) {
+            dispatch({
+                type: 'artistName',
+                artist: nomArtiste
+            })
+        }
+        }
+    }
+
+
+
+
+
 
 const styles = StyleSheet.create({
     container: {
@@ -136,9 +118,9 @@ const styles = StyleSheet.create({
     },
 
     vieww:{
-      flexDirection:'row',
-      marginTop: 8,
-      marginBottom: 8,
+        flexDirection:'row',
+        marginTop: 8,
+        marginBottom: 8,
     },
     artist2:{
         flexDirection:'column',
@@ -150,4 +132,33 @@ const styles = StyleSheet.create({
         color: 'grey',
     }
 });
-  
+
+
+
+
+
+
+// ENVOI DE l'ARTISTE SÉLECTIONNÉ
+function mapDispatchToProps2(dispatch){
+    return{
+        artist: function(artist){
+            dispatch({
+                type:"artistSelect",
+                artist:artist
+            })
+        }
+    }
+}
+
+// RECUPÉRATION DE LA LISTE DE CHANSONS
+function mapStateToProps(state){
+    // console.log("Bonjour, moi, state.songsList, je suis", state.songsReducer)
+
+    return{ songsList: state.songsReducer }
+}
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps2
+    )(ArtistsScreen)

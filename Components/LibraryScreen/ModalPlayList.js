@@ -10,8 +10,10 @@ import {
  Image
 } from 'react-native';
 import {Avatar, Text, Button, Divider, FormLabel, FormInput} from 'react-native-elements'
+import { connect } from 'react-redux';
+import {AsyncStorage} from 'react-native';
 
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
 
   constructor(){
     super()
@@ -20,6 +22,7 @@ export default class HomeScreen extends React.Component {
     this.state = {
       modalVisible: false,
       addPlaylist: '',
+      text:''
     }
   }
 
@@ -31,13 +34,54 @@ export default class HomeScreen extends React.Component {
    this.setState({modalVisible: false});
  }
 
+ async setSearchText(event){
+  //Afficher le texte tapé
+  searchText = event.nativeEvent.text;
+  //console.log("================> text",event.nativeEvent.text)
+  await this.setState({addPlaylist: searchText})
+  console.log('nouvelle liste',this.state.addPlaylist)
+  }
+
+  handleClickOk = () => {
+    console.log("valeur rrrrrrrrrrrrrrrrrr =========>", );
+    console.log("nouveletat form handleclickok",this.state.addPlaylist);
+    this.props.handleClickAdd(this.state.addPlaylist)
+    
+  }
+
+  savePlaylistStore = async () => {
+    AsyncStorage.setItem("playlistNameLocal", JSON.stringify(this.state.addPlaylist) )
+
+
+      // await AsyncStorage.setItem('playlistNameStore', this.state.addPlaylist);
+      // var tab = {}
+      // const data = await AsyncStorage.getItem('playlistNameStore');
+      // tab.push(data)
+      // console.log('THIS IS MY TAB',tab)
+      // const data = await AsyncStorage.getItem('playlistNameStore');
+      // console.log("data dans le Asyncstorage", data);
+      
+      
+    
+  };
+
+  // displayData = async () =>{
+  //   try{
+  //     let data = await AsyncStorage.getItem('playlistNameStore');
+  //     alert (playlistNameStore);
+  //   }
+  //   catch{(error)
+  //     alert(error);
+  //   }
+  // }
+
  render() {
 
    return (
 
      <View style={{alignItems: 'center'}}>
          <Divider style={{height:100}}/>
-            <Button
+            <Button 
                 title="+ Add Playlist"
                 style={{width:300}}
                 fontWeight= 'bold'
@@ -58,6 +102,7 @@ export default class HomeScreen extends React.Component {
              <Text style={styles.title}>Add a playlist</Text>
 
             <FormInput placeHolder='Enter your playlist name'
+            onChange={this.setSearchText.bind(this)}
              onChangeText={(e) => this.setState({addPlaylist: e})}/>
 
             <Divider style={{height:40}}/>
@@ -65,17 +110,25 @@ export default class HomeScreen extends React.Component {
             <View style={{flex: 1, flexDirection: 'row'}}>
                <Button
                  title="Cancel"
-                 style={{width:200}}
+                 style={{width:100}}
                  backgroundColor='#929292'
                  color='#FFFFFF'
                  onPress={this.setModalInvisible}/>
 
                 <Button
+                 onPress={() => { this.handleClickOk(), this.savePlaylistStore(), this.setModalInvisible(); }}
                  title="OK"
-                 style={{width:200}}
+                 style={{width:100}}
                  backgroundColor='#007D8F'
                  color='#FFFFFF'
-                 onPress={this.handleSubmit}/>
+                 />
+                 {/* <Button
+                 onPress={() => { this.displayData();}}
+                 title="show"
+                 style={{width:70}}
+                 backgroundColor='#007D8F'
+                 color='#FFFFFF'
+                 /> */}
             </View>
 
               </View>
@@ -112,3 +165,29 @@ const styles = StyleSheet.create({
    flexDirection: 'row',
  },
 });
+
+
+
+
+function mapDispatchtoProps (dispatch){
+  //console.log("déclenchement");
+  return{
+    handleClickAdd: function(typedText) {
+      console.log("tyedtext de reduceur =========>",typedText)
+      dispatch ({
+        type: 'add',
+        text: typedText
+      })
+    }
+  }
+}
+
+
+export default connect(
+  null,
+  mapDispatchtoProps 
+)(HomeScreen);
+
+
+
+// onPress={this.handleClickOk}
