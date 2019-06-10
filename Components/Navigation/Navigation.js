@@ -34,6 +34,7 @@ import AlbumsScreen from '../Screens/AlbumsScreen';
 import ArtistsScreen from '../Screens/ArtistsScreen';
 import PlaylistsScreen from '../LibraryScreen/PlaylistsScreen';
 import PlayerScreen from '../Screens/PlayerScreen'
+import ConnectApps from '../Screens/ConnectApps'
 
 
 const bottomNavigator = createBottomTabNavigator({
@@ -94,7 +95,8 @@ const bottomNavigator = createBottomTabNavigator({
 
 var StackNavigator = createStackNavigator({
     // pages de ma navigation sans bottom
-    Home: LibraryScreen,
+    Home: ConnectApps,
+    LibraryScreen: LibraryScreen,
     SongsScreen: SongsScreen,
     ArtistsScreen: ArtistsScreen,
     AlbumsScreen: AlbumsScreen,

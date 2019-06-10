@@ -2,17 +2,40 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Slider, Alert, Image } from 'react-native';
 import { Constants, Audio } from 'expo';
 
+import { connect } from 'react-redux'
 
-const source = {
-  uri: 'https://res.cloudinary.com/dbqu7cc4w/video/upload/v1559554351/Nujabes_-_Aruarian_Dance_wnnspj.mp3',
-};
 
-export default class PlayerScreen extends Component {
+
+
+
+
+
+
+
+
+class PlayerScreen extends Component {
+
+
+
+  
   state = {
     playingStatus: "PLAY",
   };
 
   async _playRecording() {
+
+
+
+    
+
+var chanson = this.props.selectedSong
+
+const source = chanson.song.path
+
+
+
+
+
     const { sound } = await Audio.Sound.create(
       source,
       {
@@ -77,16 +100,28 @@ export default class PlayerScreen extends Component {
   }
 
   render() {
+
+
+
+// CE CONSOLE LOG FONCTIONNE
+// console.log("CHANSON A JOUER ======= ", this.props.selectedSong)
+
+
+laChanson = this.props.selectedSong
+
+console.log("chanson à jouer lol",laChanson)
     return (
+
+
         <View style={styles.container}>
         <View style={styles.playbackContainer}>
 
 <Image
-          style={{width: 200, height: 200, marginBottom: 50}}
-          source={{uri: 'https://img.discogs.com/d3bdJwHEGND_my-Ek885mBQ8ZXA=/fit-in/600x584/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-456591-1346532956-2475.jpeg.jpg'}}
+          source={laChanson.song.cover}
+          style={{width: 350, height: 350, marginBottom: 50}}
 />
-<Text style={{fontWeight:'bold', fontSize:20}}>Arurian Dance</Text>
-<Text>Nunjabes</Text>
+<Text style={{fontWeight:'bold', fontSize:20}}>{laChanson.song.title}</Text>
+<Text>{laChanson.song.artist}</Text>
 
 
           <Slider
@@ -104,7 +139,7 @@ export default class PlayerScreen extends Component {
 
           <Text style={styles.paragraph}>{"<<"}</Text>
 
-          <TouchableOpacity
+          <TouchableOpacity 
             onPress={this._playAndPause}
             >
             <Text style={styles.paragraph}>{this.state.playingStatus}</Text>
@@ -126,7 +161,7 @@ export default class PlayerScreen extends Component {
 
 
         <View style={styles.volumeContainer}>
-           <Text style={styles.paragraph}>VOLUME</Text>
+          <Text style={styles.paragraph}>VOLUME</Text>
           <Slider
             style={styles.volumeSlider}
             value={1}
@@ -182,3 +217,20 @@ const styles = StyleSheet.create({
     width: 250,
   },
 });
+
+
+//RECUPERATION DE LA CHANSON A JOUER
+function mapStateToProps(state){
+  // console.log("Bonjour, moi, state.songsList, je suis", state.songsReducer)
+  // console.log("Bonjour, moi, state.albumReducer, je suis", state.albumReducer)
+  // console.log("Bonjour, moi, state.trackReducer, je suis", state.trackReducer)
+    console.log("Bonjour, moi, state.playerReducer, je suis", state.playerReducer)
+
+  return{
+          selectedSong: state.playerReducer }
+}
+
+
+export default connect(
+  mapStateToProps,
+  )(PlayerScreen)

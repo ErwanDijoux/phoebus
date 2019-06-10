@@ -5,91 +5,79 @@ import {
  View, ScrollView, StyleSheet, SafeAreaView, TouchableOpacity
 } from 'react-native';
 import {Avatar, Text, Button, Divider, ListItem, List} from 'react-native-elements'
+import { connect } from 'react-redux'
 
 
-export default class AlbumsScreen extends React.Component {
+class AlbumsScreen extends React.Component {
     render() {
 
-        var songsList = [
-            {
-                title: "Arurian Dance",
-                track: 3,
-                album: "Departure",
-                artist: "Nujabes",
-                year: 2004,
-                link: "SongsScreen"
-            },
-            {
-                title: "Somebody Else's Guy",
-                track: 1,
-                album: "Somebody Else's Guy",
-                artist: "Jocelyn Brown",
-                year: 1984,
-                link: "SongsScreen"
 
-            },
-            {
-                title: "Plastic Love",
-                track: 1,
-                album: "Plastic Love",
-                artist: "Mariya Takeuchi",
-                year: 1984,
-                link: "SongsScreen"
-            },
-            {
-                title: "Battlecry",
-                track: 1,
-                album: "Departure",
-                artist: "Nujabes",
-                year: 2004,
-                link: "SongsScreen"
-            },
-            {
-                title: "A day by atmosphere supreme",
-                track: 9,
-                album: "Metaphorical Music",
-                artist: "Nujabes",
-                year: 2003,
-                link: "SongsScreen"
-            },
-            ]
             
-            songsList.sort(function(a, b) {
+            this.props.songsList.sort(function(a, b) {
                 var textA = a.album.toUpperCase();
                 var textB = b.album.toUpperCase();
                 return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
             });
 
-            songsList.sort(function(a, b) {
+            this.props.songsList.sort(function(a, b) {
                 var textA = a.artist.toUpperCase();
                 var textB = b.artist.toUpperCase();
                 return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
             });
-        
+
+
+
+
+
+
+
+
         var displayedList = []
         var undisplayedAlbums = []
 
-        for (var i = 0; i < songsList.length; i++) {
-        console.log(undisplayedAlbums.indexOf(songsList[i].album))
+        for (var i = 0; i < this.props.songsList.length; i++) {
+        // console.log(undisplayedAlbums.indexOf(this.props.songsList[i].album))
 
-            if(undisplayedAlbums.indexOf(songsList[i].album) === -1){
-                displayedList.push(songsList[i]);
-                undisplayedAlbums.push(songsList[i].album)
+            if(undisplayedAlbums.indexOf(this.props.songsList[i].album) === -1){
+                displayedList.push(this.props.songsList[i]);
+                undisplayedAlbums.push(this.props.songsList[i].album)
             }
+        //A CE STADE, ON A TOUS LES ALBUMS, SANS DOUBLONS
+        };
+        // console.log("this.props.songsList ======", this.props.songsList)
 
+        console.log("displayedList ================", displayedList)
+
+        var actuallyDisplayed = []
+
+        console.log("this.props.selectedArtist", this.props.selectedArtist)
+        if(this.props.selectedArtist === "rien"){
+        actuallyDisplayed = displayedList
+        console.log("actuallyDisplayed", actuallyDisplayed)
         }
+        else{
+        for (var i = 0; i < displayedList.length; i++) {
+            // console.log(displayedList[i].artist , this.props.selectedArtist)
+            if(displayedList[i].artist === this.props.selectedArtist){
+                actuallyDisplayed.push(displayedList[i])
+            }
+        }}
 
 
 
 
+        // console.log("actuallyDisplayed ===", actuallyDisplayed)
 
-            var ArtistsListItem = displayedList.map((item, i) => {
+
+
+
+            var ArtistsListItem = actuallyDisplayed.map((item, i) => {
 
             return (
             <ListItem hideChevron style={styles.artist} 
             
                 key={i}
-                title={       <TouchableOpacity onPress={ () => this.props.navigation.navigate(item.link)}>
+                title={       <TouchableOpacity onPress={ () => {this.props.album(item), this.props.navigation.navigate("SongsScreen")}}>
 
                             <View style={styles.artist}>
                             <Image source={require('../../assets/icon_album.png')} style={{width:18, height:18, marginTop: 10, marginRight: 15}}/>
@@ -158,3 +146,33 @@ const styles = StyleSheet.create({
         color: 'grey',
     }
 });
+
+
+
+// ENVOI DE l'ALBUM SÉLECTIONNÉ
+function mapDispatchToProps3(dispatch){
+    return{
+        album: function(album){
+            dispatch({
+                type:"albumSelect",
+                album:album
+            })
+        }
+    }
+}
+
+// RECUPÉRATION DE LA LISTE DE CHANSONS
+function mapStateToProps(state){
+    // console.log("Bonjour, moi, state.songsList, je suis", state.songsReducer)
+    // console.log("Bonjour, moi, state.albumReducer, je suis", state.albumReducer)
+
+
+    return{ songsList: state.songsReducer,
+            selectedArtist: state.albumReducer }
+}
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps3
+    )(AlbumsScreen)

@@ -7,53 +7,7 @@ import { List, ListItem } from 'react-native-elements'
 
 export default class SearchScreen extends React.Component {
 
-    constructor(){
-        super();
-        this.state ={
-            data        : [{
-                name: 'Playlists',
-                avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-                subtitle: 'Vice President'
-              },
-              {
-                name: 'Artists',
-                avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-                subtitle: 'Vice Chairman'
-              },
-              {
-                  name: 'Albums',
-                  avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-                  subtitle: 'Vice Chairman'
-                },
-                {
-                  name: 'Songs',
-                  avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-                  subtitle: 'Vice Chairman'
-                }],
-                
-            dataBackup  : [{
-                name: 'Playlists',
-                avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-                subtitle: 'Vice President'
-              },
-              {
-                name: 'Artists',
-                avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-                subtitle: 'Vice Chairman'
-              },
-              {
-                  name: 'Albums',
-                  avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-                  subtitle: 'Vice Chairman'
-                },
-                {
-                  name: 'Songs',
-                  avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-                  subtitle: 'Vice Chairman'
-                }],
-        }
-    }
-
+    
     setSearchText(event){
         console.log("=========> NativeEvent",event.nativeEvent)
         //Afficher le texte tapé

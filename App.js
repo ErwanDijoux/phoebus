@@ -17,6 +17,19 @@ import ConnectApps from './Components/Screens/ConnectApps';
 
 import Navigation from './Components/Navigation/Navigation';
 
+import songsReducer from './reducers/songs.reducer'
+// import albumReducer from './reducers/album.reducer'
+// import trackReducer from './reducers/track.reducer'
+import albumReducer from './reducers/album.reducer'
+import trackReducer from './reducers/track.reducer'
+import playerReducer from './reducers/player.reducer'
+import playlistReducer from './reducers/playlist.reducer'
+import playlistedReducer from './reducers/playlisted.reducer'
+
+
+import {Provider} from 'react-redux';
+import {createStore, combineReducers} from 'redux';
+const store = createStore(combineReducers({songsReducer, albumReducer, trackReducer, playerReducer, playlistReducer, playlistedReducer}))
 
 export default class App extends React.Component {
   state = {
@@ -36,7 +49,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={{flex:1}}>
+      <Provider store={store} style={{flex:1}}>
 
       {  this.state.loaded ? (
       <ConnectApps/>
@@ -44,7 +57,7 @@ export default class App extends React.Component {
 
         
 
-      </View>
+      </Provider>
     );
   }
 }
