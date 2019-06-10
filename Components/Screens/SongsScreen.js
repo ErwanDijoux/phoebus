@@ -4,13 +4,15 @@ import {
  fontStyle,
  View, ScrollView, StyleSheet, SafeAreaView, Image, TouchableOpacity
 } from 'react-native';
-import {Avatar, Text, Button, Divider, ListItem, List} from 'react-native-elements'
+import {Avatar, Text, Button, Divider, ListItem, List, SearchBar} from 'react-native-elements'
 
 
 export default class SongsScreen extends React.Component {
-    render() {
 
-            var songsList = [
+    constructor(){
+        super();
+        this.state={
+            songsList : [
                 {
                 title: "Arurian Dance",
                 track: 3,
@@ -45,8 +47,74 @@ export default class SongsScreen extends React.Component {
                 album: "Metaphorical Music",
                 artist: "Nujabes",
                 year: 2003
+                }],
+
+            dataBackup : [
+                {
+                title: "Arurian Dance",
+                track: 3,
+                album: "Departure",
+                artist: "Nujabes",
+                year: 2004,
                 },
-            ]
+                {
+                title: "Somebody Else's Guy",
+                track: 1,
+                album: "Somebody Else's Guy",
+                artist: "Jocelyn Brown",
+                year: 1984
+                },
+                {
+                title: "Plastic Love",
+                track: 1,
+                album: "Plastic Love",
+                artist: "Mariya Takeuchi",
+                year: 1984
+                },
+                {
+                title: "Battlecry",
+                track: 1,
+                album: "Departure",
+                artist: "Nujabes",
+                year: 2004
+                },
+                {
+                title: "A day by atmosphere supreme",
+                track: 9,
+                album: "Metaphorical Music",
+                artist: "Nujabes",
+                year: 2003
+                }]
+            }
+            
+        }
+
+
+
+
+        setSearchText(event){
+            console.log("=========> NativeEvent",event.nativeEvent)
+            //Afficher le texte tapé
+            searchText = event.nativeEvent.text;
+            dataBackup       = this.state.dataBackup;
+            console.log("=====> this.state.dataBackup",this.state.dataBackup)
+            // searchText = searchText.trim().toLowerCase();
+            // console.log('=======>searchTex.trim', searchText.trim())
+            tabfilter = dataBackup.filter(function(l) {
+               console.log("L ==================>",l);
+            return l.name.match( searchText );
+           });
+           this.setState({
+            data : tabfilter
+            });
+           }
+        
+
+
+
+    render() {
+
+            var songsList = this.state.songsList
             
             songsList.sort(function(a, b) {
                 var textA = a.album.toUpperCase();
@@ -63,6 +131,8 @@ export default class SongsScreen extends React.Component {
             var songsListItem = songsList.map((item, i) => {
 
             return (
+
+                
 
             <ListItem hideChevron
                 key={i}
@@ -87,6 +157,13 @@ export default class SongsScreen extends React.Component {
 
             return (
             <View style={styles.container2}>
+
+            <SearchBar lightTheme={true} inputStyle={{backgroundColor:'white'}} containerStyle={{marginTop: 100, backgroundColor: 'transparent', borderColor:'red', borderStyle:'dotted'}}
+                
+                round
+                onChange={this.setSearchText.bind(this)}
+                placeholder='Type Here…' />
+            
             
                 <View style={{marginTop: 40, marginBottom: 20, alignItems: "center"}}><Text >Songs</Text></View>
 

@@ -11,6 +11,9 @@ import Chargement from './Components/Screens/Chargement';
 import AlbumsScreen from './Components/Screens/AlbumsScreen';
 import ArtistsScreen from './Components/Screens/ArtistsScreen';
 import PlaylistsScreen from './Components/LibraryScreen/PlaylistsScreen';
+import SearchScreen from './Components/Screens/SearchScreen';;
+import ConnectApps from './Components/Screens/ConnectApps';
+
 
 import Navigation from './Components/Navigation/Navigation';
 
@@ -36,7 +39,7 @@ export default class App extends React.Component {
       <View style={{flex:1}}>
 
       {  this.state.loaded ? (
-      <Navigation/>
+      <ConnectApps/>
     ) : null}
 
         
